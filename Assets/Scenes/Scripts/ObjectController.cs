@@ -67,7 +67,7 @@ namespace GoogleVR.HelloVR
 #endif  // !UNITY_EDITOR
         }
 
-        public void addToScreen()
+        public void AddToScreen()
         {
             if (button.Equals("E"))
             {
