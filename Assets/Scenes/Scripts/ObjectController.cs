@@ -80,6 +80,16 @@ namespace GoogleVR.HelloVR
             }
         }
 
+        public void ClearScreen()
+        {
+            UIText.text = "";
+        }
+
+        public void Calculate()
+        {
+            Debug.Log("Calculating thing");
+            ClearScreen();
+        }
 
         private void Start()
         {
