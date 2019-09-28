@@ -67,19 +67,19 @@ namespace GoogleVR.HelloVR
 #endif  // !UNITY_EDITOR
         }
 
-        public void AddToScreen()
+        public void AddNumbers()
         {
-            if (button.Equals("E"))
-            {
-                Debug.Log("Calculate");
-            }
-            else if (button.Equals("C"))
-            {
-                UIText.text = "";
-            }
-
-            UIText.text += " " + button;
+            UIText.text += button;
         }
+
+        public void AddOperations()
+        {
+            if (UIText.text[UIText.text.Length - 1] != ' ')
+            {
+                UIText.text += " " + button + " ";
+            }
+        }
+
 
         private void Start()
         {
