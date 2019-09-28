@@ -54,19 +54,6 @@ namespace GoogleVR.HelloVR
             }
         }
 
-        /// <summary>Resets this instance and its siblings to their starting positions.</summary>
-        public void Reset()
-        {
-            int sibIdx = transform.GetSiblingIndex();
-            int numSibs = transform.parent.childCount;
-            for (int i = 0; i < numSibs; i++)
-            {
-                GameObject sib = transform.parent.GetChild(i).gameObject;
-                sib.transform.localPosition = startingPosition;
-                sib.SetActive(i == sibIdx);
-            }
-        }
-
         /// <summary>Calls the Recenter event.</summary>
         public void Recenter()
         {
