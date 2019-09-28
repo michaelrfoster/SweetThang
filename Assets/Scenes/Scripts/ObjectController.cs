@@ -35,6 +35,7 @@ namespace GoogleVR.HelloVR
         public Material gazedAtMaterial;
 
         public Text UIText;
+        public string button;
 
         private Vector3 startingPosition;
         private Renderer myRenderer;
@@ -79,54 +80,18 @@ namespace GoogleVR.HelloVR
 #endif  // !UNITY_EDITOR
         }
 
-        public void Increment()
+        public void addToScreen()
         {
-            Debug.Log("Inside Increment");
-            var inc = int.Parse(UIText.text) + 1;
-            UIText.text = inc.ToString();
-        }
-
-        /// <summary>Teleport this instance randomly when triggered by a pointer click.</summary>
-        /// <param name="eventData">The pointer click event which triggered this call.</param>
-        /// 
-
-        public void TeleportRandomly(BaseEventData eventData)
-        {
-            // Only trigger on left input button, which maps to
-            // Daydream controller TouchPadButton and Trigger buttons.
-            PointerEventData ped = eventData as PointerEventData;
-            if (ped != null)
+            if (button.Equals("E"))
             {
-                if (ped.button != PointerEventData.InputButton.Left)
-                {
-                    return;
-                }
+                Debug.Log("Calculate");
+            }
+            else if (button.Equals("C"))
+            {
+                UIText.text = "";
             }
 
-            // Pick a random sibling, move them somewhere random, activate them,
-            // deactivate ourself.
-            int sibIdx = transform.GetSiblingIndex();
-            int numSibs = transform.parent.childCount;
-            sibIdx = (sibIdx + Random.Range(1, numSibs)) % numSibs;
-            GameObject randomSib = transform.parent.GetChild(sibIdx).gameObject;
-
-            // Move to random new location ±90˚ horzontal.
-            Vector3 direction = Quaternion.Euler(
-                0,
-                Random.Range(-90, 90),
-                0) * Vector3.forward;
-
-            // New location between 1.5m and 3.5m.
-            float distance = (2 * Random.value) + 1.5f;
-            Vector3 newPos = direction * distance;
-
-            // Limit vertical position to be fully in the room.
-            newPos.y = Mathf.Clamp(newPos.y, -1.2f, 4f);
-            randomSib.transform.localPosition = newPos;
-
-            randomSib.SetActive(true);
-            gameObject.SetActive(false);
-            SetGazedAt(false);
+            UIText.text += " " + button;
         }
 
         private void Start()
