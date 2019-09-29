@@ -15,6 +15,8 @@ public class Graph : MonoBehaviour
     static readonly GraphFunction[] functions = {
          SineFunction, Sine2DFunction, MultiSineFunction, Ripple, Bogo
     };
+    [Range(0,2)]
+    public float amplitude = 1;
     const float pi = Mathf.PI;
     const float xOrigin = 0f;
     const float zOrigin = 0f;
@@ -43,7 +45,7 @@ public class Graph : MonoBehaviour
         {
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = f(position.x, position.z, t) + yOffset;
+            position.y = amplitude * f(position.x, position.z, t) + yOffset;
             point.localPosition = position;
         }
     }

@@ -17,12 +17,6 @@ public class SliderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-
-    public void UpdateWave()
-    {
-        giraffe.setFunction((GraphFunctionName)(int)sidler.value);
+        giraffe.amplitude = sidler.value;
     }
 }
