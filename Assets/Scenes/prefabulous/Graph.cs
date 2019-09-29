@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Graph : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Graph : MonoBehaviour
     public GraphFunctionName function;
     public Light scaryLight;
     public Light scarierLight;
+    public Text textBox;
     static readonly GraphFunction[] functions = {
          SineFunction, Sine2DFunction, MultiSineFunction, Ripple, Bogo
     };
@@ -36,10 +38,12 @@ public class Graph : MonoBehaviour
                 setLight(Color.red);
                 CameraSpinScript.setSpeed(15);
                 function = functionName;
+                textBox.text = functionString(functionName);
             }
             else
             {
                 function = functionName;
+                textBox.text = functionString(functionName);
             }
         }
         else 
@@ -49,9 +53,29 @@ public class Graph : MonoBehaviour
                 CameraSpinScript.setSpeed(.2f);
                 setLight(new Color(83f / 255f,1f,228f / 255f));
                 function = GraphFunctionName.Ripple;
+                textBox.text = functionString(GraphFunctionName.Ripple);
             }
         }
         
+    }
+
+    public string functionString(GraphFunctionName functionName)
+    {
+        switch (functionName)
+        {
+            case GraphFunctionName.Bogo:
+                return "BOGO";
+            case GraphFunctionName.MultiSine:
+                return "Multi-Sine Function";
+            case GraphFunctionName.Ripple:
+                return "Ripple Function";
+            case GraphFunctionName.Sine:
+                return "Sine Function";
+            case GraphFunctionName.Sine2D:
+                return "2D-Sine Function";
+            default:
+                return "";
+        }
     }
     // Update is called once per frame
     void Update()
