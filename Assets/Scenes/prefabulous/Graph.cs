@@ -11,9 +11,12 @@ public class Graph : MonoBehaviour
     Transform[] points;
     public GraphFunctionName function;
     static readonly GraphFunction[] functions = {
-        SineFunction, Sine2DFunction, MultiSineFunction
+        SineFunction, Sine2DFunction, MultiSineFunction, Ripple
     };
     const float pi = Mathf.PI;
+    const float xOrigin = 0f;
+    const float zOrigin = 3f;
+    const float yOffset = -1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class Graph : MonoBehaviour
         {
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = f(position.x, position.z, t);
+            position.y = f(position.x, position.z, t) + yOffset;
             point.localPosition = position;
         }
     }
@@ -44,12 +47,11 @@ public class Graph : MonoBehaviour
         position.z = 0f;
         for (int i = 0, z = 0; z < resolution; z++)
         {
-            position.z = (z + 0.5f) * step - 1f;
+            position.z = (z + 0.5f) * step - 1f + zOrigin;
             for (int x = 0; x < resolution; x++, i++)
             {
                 Transform point = Instantiate(pointPrefab);
-                position.x = (x + 0.5f) * step - 1f;
-                //				position.z = (z + 0.5f) * step - 1f;
+                position.x = (x + 0.5f) * step - 1f + xOrigin;
                 point.localPosition = position;
                 point.localScale = scale;
                 point.SetParent(transform, false);
@@ -73,6 +75,17 @@ public class Graph : MonoBehaviour
 
     static float Sine2DFunction(float x, float z, float t)
     {
-        return Mathf.Sin(pi * (x + z + t));
+        float y = Mathf.Sin(pi * (x + t));
+        y += Mathf.Sin(pi * (z + t));
+        y *= 0.5f;
+        return y;
+    }
+
+    static float Ripple(float x, float z, float t)
+    {
+        float d = Mathf.Sqrt((x - xOrigin) * (x - xOrigin) + (z - zOrigin) * (z - zOrigin));
+        float y = Mathf.Sin(pi * (4f * d - t));
+        y /= 1f + 10f * d;
+        return y;
     }
 }

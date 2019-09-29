@@ -2,5 +2,6 @@
 {
     Sine,
     Sine2D,
-    MultiSine
+    MultiSine,
+    Ripple
 }
