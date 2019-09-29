@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraSpinScript : MonoBehaviour
 {
+    [Range(0,2)]
+    public float SPEED = 2f;
+    const float RADIUS = 2.5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +16,8 @@ public class CameraSpinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(5f + Time.time, 0, 0);
-        //transform.position = Quaternion.Euler(0f, 0f, 0f);
+        float t = Time.time;
+        transform.rotation = Quaternion.Euler(0, 180f * SPEED / Mathf.PI * t + 180f, 0);
+        transform.localPosition = new Vector3(RADIUS * Mathf.Sin(SPEED * t), 0, RADIUS * Mathf.Cos(SPEED * t));
     }
 }
