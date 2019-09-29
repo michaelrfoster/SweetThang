@@ -8,8 +8,12 @@ public class Graph : MonoBehaviour
 
     [Range(10, 100)]
     public int resolution = 10;
-
     Transform[] points;
+    [Range(0, 1)]
+    public int function;
+    static readonly GraphFunction[] functions = {
+        SineFunction, MultiSineFunction
+    };
     // Start is called before the first frame update
     void Start()
     {
@@ -19,11 +23,13 @@ public class Graph : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float t = Time.time;
+        GraphFunction f = functions[function];
         for (int i = 0; i < points.Length; i++)
         {
             Transform point = points[i];
             Vector3 position = point.localPosition;
-            position.y = Mathf.Sin(Mathf.PI * (position.x + Time.time));
+            position.y = f(position.x, t);
             point.localPosition = position;
         }
     }
@@ -45,5 +51,18 @@ public class Graph : MonoBehaviour
             point.localScale = scale;
             point.SetParent(transform,false);
         }
+    }
+
+    static float SineFunction(float x, float t)
+    {
+        return Mathf.Sin(Mathf.PI * (x + t));
+    }
+
+    static float MultiSineFunction(float x, float t)
+    {
+        float y = Mathf.Sin(Mathf.PI * (x + t));
+        y += Mathf.Sin(2f * Mathf.PI * (x + 2f * t)) / 2f;
+        y *= 2f / 3f;
+        return y;
     }
 }
