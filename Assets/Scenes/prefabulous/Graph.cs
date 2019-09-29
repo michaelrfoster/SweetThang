@@ -15,7 +15,7 @@ public class Graph : MonoBehaviour
     };
     const float pi = Mathf.PI;
     const float xOrigin = 0f;
-    const float zOrigin = 3f;
+    const float zOrigin = 0f;
     const float yOffset = -1f;
     // Start is called before the first frame update
     void Start()
