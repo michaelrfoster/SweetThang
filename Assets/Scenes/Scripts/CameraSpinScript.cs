@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraSpinScript : MonoBehaviour
 {
-    [Range(0,2)]
-    public float SPEED = 2f;
+    [Range(0,15)]
+    public static float SPEED = .2f;
     const float RADIUS = 2.5f;
     // Start is called before the first frame update
     void Start()
@@ -19,5 +19,10 @@ public class CameraSpinScript : MonoBehaviour
         float t = Time.time;
         transform.rotation = Quaternion.Euler(0, 180f * SPEED / Mathf.PI * t + 180f, 0);
         transform.localPosition = new Vector3(RADIUS * Mathf.Sin(SPEED * t), 0, RADIUS * Mathf.Cos(SPEED * t));
+    }
+
+    public static void turbo()
+    {
+        SPEED = 15;
     }
 }

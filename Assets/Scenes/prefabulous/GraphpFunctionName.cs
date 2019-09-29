@@ -3,5 +3,6 @@
     Sine,
     Sine2D,
     MultiSine,
-    Ripple
+    Ripple,
+    Bogo
 }

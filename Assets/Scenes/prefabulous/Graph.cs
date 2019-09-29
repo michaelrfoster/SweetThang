@@ -10,8 +10,10 @@ public class Graph : MonoBehaviour
     public int resolution = 10;
     Transform[] points;
     public GraphFunctionName function;
+    public Light scaryLight;
+    public Light scarierLight;
     static readonly GraphFunction[] functions = {
-         Bogo, SineFunction, Sine2DFunction, MultiSineFunction, Ripple
+         SineFunction, Sine2DFunction, MultiSineFunction, Ripple, Bogo
     };
     const float pi = Mathf.PI;
     const float xOrigin = 0f;
@@ -23,15 +25,20 @@ public class Graph : MonoBehaviour
         
     }
 
-    public void setFunction(int functionNum)
+    public void setFunction(GraphFunctionName functionName)
     {
-        function = (GraphFunctionName)functionNum;
+        function = functionName;
     }
     // Update is called once per frame
     void Update()
     {
         float t = Time.time;
         GraphFunction f = functions[(int)function];
+        if (function == GraphFunctionName.Bogo)
+        {
+            setScaryLight();
+            CameraSpinScript.turbo();
+        }
         for (int i = 0; i < points.Length; i++)
         {
             Transform point = points[i];
@@ -64,7 +71,7 @@ public class Graph : MonoBehaviour
         }
     }
 
-        static float SineFunction(float x, float z, float t)
+    static float SineFunction(float x, float z, float t)
     {
         return Mathf.Sin(pi * (x + t));
     }
@@ -91,6 +98,12 @@ public class Graph : MonoBehaviour
         float y = Mathf.Sin(pi * (4f * d - t));
         y /= 1f + 10f * d;
         return y;
+    }
+
+    private void setScaryLight()
+    {
+        scaryLight.color = Color.red;
+        scarierLight.color = Color.red;
     }
 
     static float Bogo(float x, float z, float t)

@@ -23,6 +23,6 @@ public class SliderScript : MonoBehaviour
 
     public void UpdateWave()
     {
-        giraffe.setFunction((int)sidler.value);
+        giraffe.setFunction((GraphFunctionName)(int)sidler.value);
     }
 }

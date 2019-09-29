@@ -33,10 +33,8 @@ namespace GoogleVR.HelloVR
 
         /// <summary>The material to use when this object is active (gazed at).</summary>
         public Material gazedAtMaterial;
-
-        public Text UIText;
-        public string button;
-        public static bool isLocked = false;
+        public Graph graph;
+        public GraphFunctionName functionName;
 
         private Vector3 startingPosition;
         private Renderer myRenderer;
@@ -66,89 +64,10 @@ namespace GoogleVR.HelloVR
             }
 #endif  // !UNITY_EDITOR
         }
-
-        public void AddNumbers()
+        
+        public void changeFunction()
         {
-            Debug.Log(isLocked);
-            if (isLocked)
-            {
-                UIText.text = button;
-                isLocked = false;
-                return;
-            }
-            if (UIText.text.Equals("0"))
-            {
-                UIText.text = button;
-            }
-            else
-            {
-                UIText.text += button;
-                
-            }
-           
-        }
-
-        public void AddOperations()
-        {
-            if (isLocked)
-            {
-                UIText.text = "0 " + button + " ";
-                isLocked = false;
-                return;
-            }
-            if (UIText.text[UIText.text.Length - 1] == ' ')
-            {
-                return;
-                
-            }
-            Calculate();
-            UIText.text += " " + button + " ";
-
-        }
-
-        public void ClearScreen()
-        {
-            UIText.text = "0";
-        }
-
-        public void Calculate()
-        {
-            string[] I = UIText.text.Split(' ');
-            if (I[I.Length - 1] == "")
-            {
-                UIText.text = "INVALID INPUT";
-                isLocked = true;
-                return;
-            }
-            
-            if (I.Length < 3)
-            {
-                return;
-            }
-
-            try
-            {
-                switch(I[1])
-                {
-                    case "+":
-                        UIText.text = (int.Parse(I[0]) + int.Parse(I[2])).ToString(); break;
-                    case "-":
-                        UIText.text = (int.Parse(I[0]) - int.Parse(I[2])).ToString(); break;
-                    case "x":
-                        UIText.text = (int.Parse(I[0]) * int.Parse(I[2])).ToString(); break;
-                    case "%":
-                        UIText.text = (int.Parse(I[0]) / int.Parse(I[2])).ToString(); break;
-                    default:
-
-                        break;
-                }
-            }
-            catch (System.DivideByZeroException)
-            {
-                UIText.text = "DIVIDE BY ZERO ERROR";
-                isLocked = true;
-            }
-
+            graph.setFunction(functionName);
         }
 
         private void Start()
