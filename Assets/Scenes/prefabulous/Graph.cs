@@ -11,7 +11,7 @@ public class Graph : MonoBehaviour
     Transform[] points;
     public GraphFunctionName function;
     static readonly GraphFunction[] functions = {
-        SineFunction, Sine2DFunction, MultiSineFunction, Ripple
+         Bogo, SineFunction, Sine2DFunction, MultiSineFunction, Ripple
     };
     const float pi = Mathf.PI;
     const float xOrigin = 0f;
@@ -91,5 +91,10 @@ public class Graph : MonoBehaviour
         float y = Mathf.Sin(pi * (4f * d - t));
         y /= 1f + 10f * d;
         return y;
+    }
+
+    static float Bogo(float x, float z, float t)
+    {
+        return Random.Range(-1f, 1f);
     }
 }
