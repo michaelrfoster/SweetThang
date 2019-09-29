@@ -29,18 +29,36 @@ public class Graph : MonoBehaviour
 
     public void setFunction(GraphFunctionName functionName)
     {
-        function = functionName;
+        if (function != GraphFunctionName.Bogo)
+        {
+            if (functionName == GraphFunctionName.Bogo)
+            {
+                setLight(Color.red);
+                CameraSpinScript.setSpeed(15);
+                function = functionName;
+            }
+            else
+            {
+                function = functionName;
+            }
+        }
+        else 
+        {
+            if (functionName == GraphFunctionName.Bogo)
+            {
+                CameraSpinScript.setSpeed(.2f);
+                setLight(new Color(83f / 255f,1f,228f / 255f));
+                function = GraphFunctionName.Ripple;
+            }
+        }
+        
     }
     // Update is called once per frame
     void Update()
     {
         float t = Time.time;
         GraphFunction f = functions[(int)function];
-        if (function == GraphFunctionName.Bogo)
-        {
-            setScaryLight();
-            CameraSpinScript.turbo();
-        }
+        
         for (int i = 0; i < points.Length; i++)
         {
             Transform point = points[i];
@@ -102,14 +120,16 @@ public class Graph : MonoBehaviour
         return y;
     }
 
-    private void setScaryLight()
+    private void setLight(Color wowcolor)
     {
-        scaryLight.color = Color.red;
-        scarierLight.color = Color.red;
+
+        scaryLight.color = wowcolor;
+        scarierLight.color = wowcolor;
     }
 
     static float Bogo(float x, float z, float t)
     {
+
         return Random.Range(-1f, 1f);
     }
 }

@@ -21,8 +21,8 @@ public class CameraSpinScript : MonoBehaviour
         transform.localPosition = new Vector3(RADIUS * Mathf.Sin(SPEED * t), 0, RADIUS * Mathf.Cos(SPEED * t));
     }
 
-    public static void turbo()
+    public static void setSpeed(float speed)
     {
-        SPEED = 15;
+        SPEED = speed;
     }
 }
