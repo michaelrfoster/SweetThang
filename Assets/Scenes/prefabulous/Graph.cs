@@ -9,8 +9,7 @@ public class Graph : MonoBehaviour
     [Range(10, 100)]
     public int resolution = 10;
     Transform[] points;
-    [Range(0, 1)]
-    public int function;
+    public GraphFunctionName function;
     static readonly GraphFunction[] functions = {
         SineFunction, MultiSineFunction
     };
@@ -24,7 +23,7 @@ public class Graph : MonoBehaviour
     void Update()
     {
         float t = Time.time;
-        GraphFunction f = functions[function];
+        GraphFunction f = functions[(int)function];
         for (int i = 0; i < points.Length; i++)
         {
             Transform point = points[i];
