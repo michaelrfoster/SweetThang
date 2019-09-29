@@ -15,9 +15,9 @@ public class LookFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.eulerAngles = new Vector3(foo.transform.eulerAngles.x, foo.transform.eulerAngles.y, foo.transform.eulerAngles.z);
-        stay = transform.position;
+        transform.localPosition = Vector3.zero;
+        stay = foo.transform.position;
         stay.y = -0.5f;
-        transform.position = stay;
+        foo.transform.position = stay;
     }
 }

@@ -7,6 +7,7 @@ public class SliderScript : MonoBehaviour
 {
     public Slider sidler;
     public Graph giraffe;
+    public Text ampCount;
 
     // Start is called before the first frame update
     void Start()
@@ -18,5 +19,6 @@ public class SliderScript : MonoBehaviour
     void Update()
     {
         giraffe.amplitude = sidler.value;
+        ampCount.text = "A = " + sidler.value.ToString();
     }
 }
