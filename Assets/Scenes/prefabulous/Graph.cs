@@ -23,6 +23,10 @@ public class Graph : MonoBehaviour
         
     }
 
+    public void setFunction(int functionNum)
+    {
+        function = (GraphFunctionName)functionNum;
+    }
     // Update is called once per frame
     void Update()
     {

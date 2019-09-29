@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class SliderScript : MonoBehaviour
 {
-    public GameObject cube;
-    public Slider slider;
+    public Slider sidler;
+    public Graph giraffe;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,8 @@ public class SliderScript : MonoBehaviour
     }
 
 
-    public void UpdateSize()
+    public void UpdateWave()
     {
-        cube.gameObject.transform.localScale = new Vector3(slider.value, slider.value, slider.value);
+        giraffe.setFunction((int)sidler.value);
     }
 }
