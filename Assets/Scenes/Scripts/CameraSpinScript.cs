@@ -13,6 +13,7 @@ public class CameraSpinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Camera.main.transform.eulerAngles += new Vector3(.1f, .1f, .1f);
+        transform.rotation = Quaternion.Euler(5f + Time.time, 0, 0);
+        //transform.position = Quaternion.Euler(0f, 0f, 0f);
     }
 }
